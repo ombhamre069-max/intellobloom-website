@@ -136,7 +136,7 @@ export function AmbientScrollCanvas() {
           h * 0.32,
           Math.max(w, h) * 0.65,
         );
-        gradient.addColorStop(0, `rgba(37, 99, 235, ${0.045 + p * 0.035})`);
+        gradient.addColorStop(0, `rgba(242, 140, 40, ${0.04 + p * 0.03})`);
         gradient.addColorStop(0.5, `rgba(100, 116, 139, ${0.04 + p * 0.03})`);
         gradient.addColorStop(1, "rgba(248, 250, 252, 0)");
         ctx.fillStyle = gradient;
@@ -171,7 +171,7 @@ export function AmbientScrollCanvas() {
         const dist = Math.hypot(a.x - b.x, a.y - b.y);
         const linkDist = w < 768 ? 95 : 120;
         const alpha = (1 - dist / linkDist) * (0.1 + p * 0.08);
-        ctx.strokeStyle = `rgba(37, 99, 235, ${alpha})`;
+        ctx.strokeStyle = `rgba(242, 140, 40, ${alpha})`;
         ctx.lineWidth = 0.6;
         ctx.beginPath();
         ctx.moveTo(a.x, a.y);

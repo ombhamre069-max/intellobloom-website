@@ -15,11 +15,11 @@ export function HeroEcosystemVisual() {
   return (
     <div className="relative mx-auto aspect-square w-full max-w-[440px] lg:max-w-none">
       <div
-        className="absolute inset-[-10%] rounded-full bg-[radial-gradient(circle,rgb(37_99_235/0.16),transparent_62%)] blur-2xl"
+        className="absolute inset-[-10%] rounded-full bg-[radial-gradient(circle,rgb(242_140_40/0.16),transparent_62%)] blur-2xl"
         aria-hidden
       />
       <div
-        className="absolute inset-[8%] rounded-full border border-slate-200/80 bg-white/50 shadow-[inset_0_0_48px_rgb(37_99_235/0.05)] backdrop-blur-md"
+        className="absolute inset-[8%] rounded-full border border-stem-grey/20 bg-white/50 shadow-[inset_0_0_48px_rgb(242_140_40/0.06)] backdrop-blur-md"
         aria-hidden
       />
 
@@ -71,8 +71,8 @@ export function HeroEcosystemVisual() {
       <VentureChip
         venture={intellistem}
         className="left-[4%] top-[58%] sm:left-[2%]"
-        accent="from-sky-500/10 to-white border-slate-200 hover:border-brand/40"
-        labelClass="text-brand-secondary"
+        accent="from-stem-orange/10 to-white border-stem-grey/20 hover:border-stem-orange/45"
+        labelClass="text-stem-orange"
       />
       <VentureChip
         venture={agni}

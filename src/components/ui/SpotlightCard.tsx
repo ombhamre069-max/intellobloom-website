@@ -14,7 +14,7 @@ export function SpotlightCard({ children, className, innerClassName }: Spotlight
   const reduced = useReducedMotion();
   const x = useMotionValue(0);
   const y = useMotionValue(0);
-  const background = useMotionTemplate`radial-gradient(480px circle at ${x}px ${y}px, rgb(37 99 235 / 0.11), transparent 42%)`;
+  const background = useMotionTemplate`radial-gradient(480px circle at ${x}px ${y}px, rgb(242 140 40 / 0.12), transparent 42%)`;
 
   const onMove = (e: MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -49,7 +49,7 @@ export function SpotlightCard({ children, className, innerClassName }: Spotlight
         className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
         style={{
           background:
-            "linear-gradient(135deg, rgb(37 99 235 / 0.06), transparent 40%, rgb(100 116 139 / 0.05))",
+            "linear-gradient(135deg, rgb(242 140 40 / 0.07), transparent 40%, rgb(112 119 128 / 0.06))",
         }}
         aria-hidden
       />

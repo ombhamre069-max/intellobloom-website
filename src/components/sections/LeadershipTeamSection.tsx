@@ -1,20 +1,11 @@
 "use client";
 
+import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { leadershipTeam } from "@/content/team";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { SectionReveal } from "@/components/ui/SectionReveal";
 import { SpotlightCard } from "@/components/ui/SpotlightCard";
 import { fadeUp, viewport } from "@/components/motion/variants";
-
-function initials(name: string): string {
-  return name
-    .split(" ")
-    .map((part) => part[0])
-    .join("")
-    .slice(0, 2)
-    .toUpperCase();
-}
 
 export function LeadershipTeamSection() {
   const reduced = useReducedMotion();
@@ -39,22 +30,25 @@ export function LeadershipTeamSection() {
             visible: { transition: { staggerChildren: 0.08 } },
           }}
         >
-          {leadershipTeam.map((member, index) => (
+          {leadershipTeam.map((member) => (
             <motion.li key={member.id} variants={fadeUp}>
-              <SpotlightCard
-                className="card-border-glow h-full"
-                innerClassName="p-6"
-              >
-                <div className="flex items-start gap-4">
+              <SpotlightCard className="card-border-glow h-full" innerClassName="p-6">
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
                   <motion.div
-                    className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-stem-orange/30 via-white to-stem-grey/20 font-display text-sm font-semibold text-midnight shadow-[inset_0_0_0_1px_rgb(242_140_40/0.25)]"
-                    aria-hidden
-                    whileHover={reduced ? undefined : { rotate: index % 2 === 0 ? 3 : -3 }}
+                    className="relative mx-auto h-[120px] w-[120px] shrink-0 overflow-hidden rounded-2xl border border-stem-grey/20 bg-stem-grey/10 shadow-sm sm:mx-0"
+                    whileHover={reduced ? undefined : { scale: 1.02 }}
+                    transition={{ duration: 0.25 }}
                   >
-                    {initials(member.name)}
-                    <span className="absolute -bottom-1 -right-1 h-3 w-3 rounded-full border-2 border-white bg-stem-orange" />
+                    <Image
+                      src={member.photo}
+                      alt=""
+                      fill
+                      className="object-cover object-top"
+                      sizes="120px"
+                    />
+                    <span className="absolute bottom-2 right-2 h-2.5 w-2.5 rounded-full border-2 border-white bg-stem-orange" aria-hidden />
                   </motion.div>
-                  <div>
+                  <div className="text-center sm:text-left">
                     <h3 className="font-display text-lg font-semibold text-midnight">
                       {member.name}
                     </h3>
@@ -68,13 +62,6 @@ export function LeadershipTeamSection() {
             </motion.li>
           ))}
         </motion.ul>
-
-        <SectionReveal className="mt-10">
-          <p className="mx-auto max-w-2xl text-center text-sm text-stem-grey">
-            Team photography and extended bios can be added when approved for publication. Roles
-            listed reflect current organization structure.
-          </p>
-        </SectionReveal>
       </div>
     </section>
   );
