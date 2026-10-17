@@ -24,7 +24,7 @@ export function BusinessEcosystem() {
       className="section-glass-dark relative overflow-hidden py-24 text-white sm:py-28"
     >
       <div className="engineering-lines ecosystem-grid-drift absolute inset-0 opacity-50" aria-hidden />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgb(242_140_40/0.14),transparent_55%)] ecosystem-glow-drift" aria-hidden />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgb(37_99_235/0.11),transparent_55%)] ecosystem-glow-drift" aria-hidden />
       <div className="relative mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
         <SectionReveal>
           <SectionHeader
@@ -47,12 +47,12 @@ export function BusinessEcosystem() {
             >
               <defs>
                 <linearGradient id="stemBranch" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stopColor="#F28C28" />
-                  <stop offset="100%" stopColor="#707780" />
+                  <stop offset="0%" stopColor="#2563eb" />
+                  <stop offset="100%" stopColor="#64748b" />
                 </linearGradient>
                 <linearGradient id="agniBranch" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stopColor="#707780" />
-                  <stop offset="100%" stopColor="#E85D4C" />
+                  <stop offset="0%" stopColor="#64748b" />
+                  <stop offset="100%" stopColor="#b45309" />
                 </linearGradient>
               </defs>
               <motion.path

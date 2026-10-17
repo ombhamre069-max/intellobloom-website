@@ -5,28 +5,33 @@
   --scroll-progress: 0;
   --scroll-shift: 0;
 
-  --midnight-navy: #4a4f57;
-  --deep-graphite: #707780;
+  /* Sapphire & slate — classic corporate tech (distinct from prior orange/teal) */
+  --midnight-navy: #1e293b;
+  --deep-graphite: #475569;
   --premium-off-white: #ffffff;
-  --muted-slate: #707780;
-  --electric-blue: #f28c28;
-  --restrained-violet: #707780;
-  --intellistem-orange: #f28c28;
-  --intellistem-grey: #707780;
-  --agni-accent: #e85d4c;
+  --muted-slate: #94a3b8;
+  --surface-base: #eef1f8;
+  --brand-primary: #2563eb;
+  --brand-primary-deep: #1d4ed8;
+  --brand-secondary: #6366f1;
+  --electric-blue: #2563eb;
+  --restrained-violet: #64748b;
+  --intellistem-orange: #2563eb;
+  --intellistem-grey: #64748b;
+  --agni-accent: #c2410c;
 
-  --background: var(--premium-off-white);
+  --background: #f6f8fc;
   --foreground: #0f172a;
-  --surface-dark: var(--midnight-navy);
-  --surface-elevated: #151c2f;
+  --surface-dark: #0f172a;
+  --surface-elevated: #1e293b;
 
   --radius-sm: 0.375rem;
   --radius-md: 0.625rem;
   --radius-lg: 1rem;
   --radius-xl: 1.25rem;
 
-  --shadow-soft: 0 4px 24px -4px rgb(11 16 32 / 0.12);
-  --shadow-glow: 0 0 40px -8px rgb(242 140 40 / 0.35);
+  --shadow-soft: 0 4px 24px -4px rgb(15 23 42 / 0.08);
+  --shadow-glow: 0 0 36px -10px rgb(37 99 235 / 0.28);
 
   --duration-fast: 150ms;
   --duration-normal: 280ms;
@@ -47,6 +52,9 @@
   --color-stem-orange: var(--intellistem-orange);
   --color-stem-grey: var(--intellistem-grey);
   --color-agni: var(--agni-accent);
+  --color-brand: var(--brand-primary);
+  --color-brand-secondary: var(--brand-secondary);
+  --color-surface-base: var(--surface-base);
   --font-sans: var(--font-inter);
   --font-display: var(--font-display);
   --font-mono: var(--font-geist-mono);
@@ -88,7 +96,7 @@ body {
 }
 
 ::selection {
-  background: rgb(242 140 40 / 0.22);
+  background: rgb(37 99 235 / 0.18);
 }
 
 .grid-pattern {
@@ -160,32 +168,134 @@ body {
 }
 
 .glass-nav-light {
-  background: rgb(248 250 252 / 0.85);
-  backdrop-filter: blur(12px);
+  background: rgb(248 250 252 / 0.88);
+  backdrop-filter: blur(10px);
   border-bottom: 1px solid rgb(15 23 42 / 0.06);
 }
 
 .scroll-ambient-canvas {
-  opacity: calc(0.55 + var(--scroll-progress) * 0.25);
+  opacity: calc(0.45 + var(--scroll-progress) * 0.15);
   mix-blend-mode: normal;
 }
 
+.text-gradient-brand {
+  background: linear-gradient(125deg, #1d4ed8 0%, #2563eb 45%, #6366f1 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-mesh {
+  background:
+    radial-gradient(ellipse 90% 60% at 10% 20%, rgb(37 99 235 / 0.09), transparent 50%),
+    radial-gradient(ellipse 70% 50% at 90% 30%, rgb(100 116 139 / 0.08), transparent 45%),
+    radial-gradient(ellipse 50% 40% at 50% 100%, rgb(99 102 241 / 0.06), transparent 55%);
+}
+
+@keyframes mesh-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(12px, -8px, 0);
+  }
+}
+
+.mesh-blob {
+  animation: mesh-drift 28s ease-in-out infinite;
+}
+
+.mesh-blob-b {
+  animation-duration: 34s;
+  animation-delay: -8s;
+}
+
+.mesh-blob-c {
+  animation-duration: 24s;
+  animation-delay: -4s;
+}
+
+@keyframes trust-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.trust-marquee-track {
+  animation: trust-marquee 48s linear infinite;
+  will-change: transform;
+}
+
+.btn-shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    rgb(255 255 255 / 0.35) 50%,
+    transparent 65%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.65s ease;
+}
+
+.btn-shine:hover::after {
+  transform: translateX(120%);
+}
+
+@keyframes border-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.card-border-glow {
+  position: relative;
+}
+
+.card-border-glow::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    rgb(37 99 235 / 0.32),
+    rgb(100 116 139 / 0.12),
+    rgb(99 102 241 / 0.22)
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.card-border-glow:hover::before {
+  opacity: 1;
+}
+
 .section-glass {
-  background: rgb(255 255 255 / 0.82);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgb(255 255 255 / 0.62);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.65);
 }
 
 .section-glass-muted {
-  background: rgb(248 250 252 / 0.78);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgb(248 250 252 / 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.5);
 }
 
 .section-glass-dark {
-  background: rgb(63 68 76 / 0.92);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: rgb(15 23 42 / 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .mesh-noise {
@@ -252,10 +362,10 @@ body {
 
 .scroll-grid-drift {
   background-image:
-    linear-gradient(rgb(242 140 40 / 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(112 119 128 / 0.08) 1px, transparent 1px);
+    linear-gradient(rgb(37 99 235 / 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(148 163 184 / 0.07) 1px, transparent 1px);
   background-size: 64px 64px;
-  transform: translate3d(0, calc(var(--scroll-shift) * -0.6px), 0);
+  transform: translate3d(0, calc(var(--scroll-shift) * -0.35px), 0);
 }
 
 .section-grid-drift {
@@ -306,6 +416,10 @@ body {
   animation: hero-orbit-spin 48s linear infinite;
 }
 
+.hero-orbit-slow {
+  animation: hero-orbit-spin 72s linear infinite;
+}
+
 @keyframes scroll-indicator-pulse {
   0%,
   100% {
@@ -339,7 +453,10 @@ body {
   }
 
   .hero-orbit,
-  .scroll-indicator {
+  .hero-orbit-slow,
+  .scroll-indicator,
+  .mesh-blob,
+  .trust-marquee-track {
     animation: none !important;
   }
 }

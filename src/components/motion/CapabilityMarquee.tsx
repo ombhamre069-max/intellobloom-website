@@ -20,7 +20,7 @@ export function CapabilityMarquee() {
 
   return (
     <div
-      className="pointer-events-none fixed bottom-0 left-0 right-0 z-[2] overflow-hidden border-t border-stem-grey/10 bg-white/70 py-2 backdrop-blur-md"
+      className="pointer-events-none fixed bottom-0 left-0 right-0 z-[2] overflow-hidden border-t border-stem-orange/15 bg-white/55 py-2.5 backdrop-blur-lg"
       aria-hidden
     >
       <motion.div

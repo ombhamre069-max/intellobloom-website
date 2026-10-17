@@ -36,13 +36,15 @@ export function Navbar() {
     };
   }, [mobileOpen]);
 
+  const isActive = (href: string) =>
+    href === "/"
+      ? pathname === "/"
+      : !href.startsWith("/#") && pathname.startsWith(href);
+
   const navLinkClass = (href: string) => {
-    const active =
-      href === "/"
-        ? pathname === "/"
-        : !href.startsWith("/#") && pathname.startsWith(href);
+    const active = isActive(href);
     return cn(
-      "relative text-sm transition-colors duration-[var(--duration-normal)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stem-orange rounded-sm px-1 py-0.5",
+      "group relative text-sm transition-colors duration-[var(--duration-normal)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stem-orange rounded-sm px-1 py-0.5",
       active ? "text-stem-orange" : "text-stem-grey hover:text-midnight",
     );
   };
@@ -76,6 +78,13 @@ export function Navbar() {
             <li key={item.href}>
               <Link href={resolveHref(item.href)} className={navLinkClass(item.href)}>
                 {item.label}
+                <span
+                  className={cn(
+                    "absolute -bottom-1 left-0 h-0.5 rounded-full bg-stem-orange transition-all duration-300",
+                    isActive(item.href) ? "w-full" : "w-0 group-hover:w-full",
+                  )}
+                  aria-hidden
+                />
               </Link>
             </li>
           ))}

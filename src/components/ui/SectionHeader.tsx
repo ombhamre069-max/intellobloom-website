@@ -1,4 +1,8 @@
+"use client";
+
+import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { fadeUp, viewport } from "@/components/motion/variants";
 
 type SectionHeaderProps = {
   eyebrow?: string;
@@ -17,41 +21,61 @@ export function SectionHeader({
   dark = false,
   className,
 }: SectionHeaderProps) {
-  return (
-    <div
-      className={cn(
-        align === "center" && "mx-auto max-w-2xl text-center",
-        className,
-      )}
-    >
+  const reduced = useReducedMotion();
+
+  const content = (
+    <>
       {eyebrow && (
-        <p
-          className={cn(
-            "mb-3 text-xs font-medium uppercase tracking-[0.22em]",
-            "text-stem-orange",
-          )}
-        >
+        <p className="mb-3 inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.24em] text-stem-orange">
+          <span className="h-px w-8 bg-gradient-to-r from-stem-orange to-transparent" aria-hidden />
           {eyebrow}
         </p>
       )}
       <h2
         className={cn(
-          "font-display text-3xl font-semibold tracking-tight sm:text-4xl lg:text-[2.75rem] lg:leading-[1.1]",
+          "font-display text-3xl font-semibold tracking-tight sm:text-4xl lg:text-[2.85rem] lg:leading-[1.08]",
           dark ? "text-white" : "text-midnight",
         )}
       >
         {title}
       </h2>
+      <div
+        className={cn(
+          "mt-4 h-1 rounded-full bg-gradient-to-r from-stem-orange via-stem-orange/40 to-transparent",
+          align === "center" ? "mx-auto w-24" : "w-20",
+        )}
+        aria-hidden
+      />
       {description && (
         <p
           className={cn(
-            "mt-4 text-base leading-relaxed sm:text-lg",
+            "mt-5 text-base leading-relaxed sm:text-lg",
             dark ? "text-slate-muted" : "text-stem-grey",
           )}
         >
           {description}
         </p>
       )}
-    </div>
+    </>
+  );
+
+  if (reduced) {
+    return (
+      <div className={cn(align === "center" && "mx-auto max-w-2xl text-center", className)}>
+        {content}
+      </div>
+    );
+  }
+
+  return (
+    <motion.div
+      className={cn(align === "center" && "mx-auto max-w-2xl text-center", className)}
+      initial="hidden"
+      whileInView="visible"
+      viewport={viewport}
+      variants={fadeUp}
+    >
+      {content}
+    </motion.div>
   );
 }

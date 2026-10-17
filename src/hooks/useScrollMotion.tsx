@@ -1,15 +1,6 @@
 "use client";
 
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-  type ReactNode,
-} from "react";
+import { useCallback, useEffect, useRef, useSyncExternalStore, type ReactNode } from "react";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
 type ScrollMotion = {
@@ -19,27 +10,38 @@ type ScrollMotion = {
   velocity: number;
 };
 
-const ScrollMotionContext = createContext<ScrollMotion>({
+const defaultMotion: ScrollMotion = {
   scrollY: 0,
   progress: 0,
   direction: 1,
   velocity: 0,
-});
+};
+
+const motionRef: { current: ScrollMotion } = { current: defaultMotion };
+const listeners = new Set<() => void>();
+
+function emit() {
+  listeners.forEach((l) => l());
+}
+
+function subscribe(listener: () => void) {
+  listeners.add(listener);
+  return () => listeners.delete(listener);
+}
+
+function getSnapshot() {
+  return motionRef.current;
+}
 
 export function useScrollMotion(): ScrollMotion {
-  return useContext(ScrollMotionContext);
+  return useSyncExternalStore(subscribe, getSnapshot, () => defaultMotion);
 }
 
 export function ScrollMotionProvider({ children }: { children: ReactNode }) {
   const reduced = usePrefersReducedMotion();
-  const [motion, setMotion] = useState<ScrollMotion>({
-    scrollY: 0,
-    progress: 0,
-    direction: 1,
-    velocity: 0,
-  });
   const lastY = useRef(0);
   const raf = useRef<number | null>(null);
+  const lastEmit = useRef(0);
 
   const tick = useCallback(() => {
     const y = window.scrollY;
@@ -51,17 +53,18 @@ export function ScrollMotionProvider({ children }: { children: ReactNode }) {
 
     document.documentElement.style.setProperty("--scroll-y", String(y));
     document.documentElement.style.setProperty("--scroll-progress", String(progress));
-    document.documentElement.style.setProperty(
-      "--scroll-shift",
-      String(y * 0.35),
-    );
+    document.documentElement.style.setProperty("--scroll-shift", String(y * 0.35));
     document.documentElement.style.setProperty("--scroll-velocity", String(velocity));
-    document.documentElement.style.setProperty(
-      "--scroll-rotate",
-      String(progress * 360),
-    );
+    document.documentElement.style.setProperty("--scroll-rotate", String(progress * 360));
 
-    setMotion({ scrollY: y, progress, direction, velocity });
+    motionRef.current = { scrollY: y, progress, direction, velocity };
+
+    const now = performance.now();
+    if (now - lastEmit.current > 120) {
+      lastEmit.current = now;
+      emit();
+    }
+
     raf.current = null;
   }, []);
 
@@ -70,6 +73,8 @@ export function ScrollMotionProvider({ children }: { children: ReactNode }) {
       document.documentElement.style.setProperty("--scroll-y", "0");
       document.documentElement.style.setProperty("--scroll-progress", "0");
       document.documentElement.style.setProperty("--scroll-shift", "0");
+      motionRef.current = defaultMotion;
+      emit();
       return;
     }
 
@@ -89,11 +94,5 @@ export function ScrollMotionProvider({ children }: { children: ReactNode }) {
     };
   }, [reduced, tick]);
 
-  const value = useMemo(() => motion, [motion]);
-
-  return (
-    <ScrollMotionContext.Provider value={value}>
-      {children}
-    </ScrollMotionContext.Provider>
-  );
+  return children;
 }

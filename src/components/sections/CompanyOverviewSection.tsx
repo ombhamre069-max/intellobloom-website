@@ -5,6 +5,7 @@ import { Building2, Factory, GraduationCap, Handshake } from "lucide-react";
 import { company } from "@/content/company";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { SectionReveal } from "@/components/ui/SectionReveal";
+import { SpotlightCard } from "@/components/ui/SpotlightCard";
 import { fadeUp, viewport } from "@/components/motion/variants";
 import { cn } from "@/lib/utils";
 
@@ -17,66 +18,80 @@ export function CompanyOverviewSection() {
   return (
     <section id="overview" className="section-glass border-b border-stem-grey/10 py-24 sm:py-28">
       <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-        <SectionReveal>
-          <SectionHeader
-            eyebrow="Company Overview"
-            title={overview.headline}
-            description={overview.summary}
-            className="max-w-3xl"
-          />
-        </SectionReveal>
+        <SectionHeader
+          eyebrow="Company Overview"
+          title={overview.headline}
+          description={overview.summary}
+          className="max-w-3xl"
+        />
 
         <motion.div
-          className="mt-14 grid gap-6 lg:grid-cols-2"
+          className="mt-14 grid gap-5 lg:grid-cols-12 lg:gap-6"
           initial="hidden"
           whileInView="visible"
           viewport={viewport}
           variants={{
             hidden: {},
-            visible: { transition: { staggerChildren: 0.1 } },
+            visible: { transition: { staggerChildren: 0.09 } },
           }}
         >
           {overview.blocks.map((block, index) => {
             const Icon = icons[index] ?? Building2;
             return (
-              <motion.article
+              <motion.div
                 key={block.title}
                 variants={fadeUp}
-                whileHover={reduced ? undefined : { y: -4 }}
                 className={cn(
-                  "rounded-2xl border border-stem-grey/15 bg-off-white p-8 shadow-sm transition-shadow hover:shadow-soft",
-                  index === 0 && "lg:col-span-2 lg:flex lg:gap-8 lg:p-10",
+                  index === 0 && "lg:col-span-7",
+                  index === 1 && "lg:col-span-5",
+                  index === 2 && "lg:col-span-5",
+                  index === 3 && "lg:col-span-7",
                 )}
               >
-                <div
-                  className={cn(
-                    "flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-stem-orange/12 text-stem-orange",
-                    index === 0 && "lg:h-14 lg:w-14",
+                <SpotlightCard
+                  className={cn("card-border-glow h-full", index === 0 && "lg:min-h-[220px]")}
+                  innerClassName={cn(
+                    "flex flex-col p-8",
+                    index === 0 && "lg:flex-row lg:items-start lg:gap-8 lg:p-10",
                   )}
                 >
-                  <Icon className="h-6 w-6" aria-hidden />
-                </div>
-                <div className={cn(index === 0 && "lg:mt-0 mt-5")}>
-                  <h3 className="font-display text-xl font-semibold text-midnight">{block.title}</h3>
-                  <p className="mt-3 text-base leading-relaxed text-stem-grey">{block.body}</p>
-                </div>
-              </motion.article>
+                  <div
+                    className={cn(
+                      "flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-stem-orange/25 to-stem-orange/5 text-stem-orange shadow-[inset_0_0_0_1px_rgb(242_140_40/0.2)]",
+                      index === 0 && "lg:h-14 lg:w-14",
+                    )}
+                  >
+                    <Icon className="h-6 w-6" aria-hidden />
+                  </div>
+                  <div className="mt-5 lg:mt-0">
+                    <h3 className="font-display text-xl font-semibold text-midnight">{block.title}</h3>
+                    <p className="mt-3 text-base leading-relaxed text-stem-grey">{block.body}</p>
+                  </div>
+                </SpotlightCard>
+              </motion.div>
             );
           })}
         </motion.div>
 
         <SectionReveal className="mt-12">
-          <div className="rounded-2xl border border-stem-orange/20 bg-gradient-to-r from-stem-orange/8 via-white to-stem-grey/5 px-6 py-8 sm:px-10">
-            <p className="text-sm font-semibold uppercase tracking-wider text-stem-orange">
+          <motion.div
+            className="relative overflow-hidden rounded-2xl border border-stem-orange/25 bg-gradient-to-br from-stem-orange/12 via-white/80 to-stem-grey/8 px-6 py-8 backdrop-blur-md sm:px-10"
+            whileHover={reduced ? undefined : { scale: 1.005 }}
+          >
+            <div
+              className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-stem-orange/20 blur-3xl"
+              aria-hidden
+            />
+            <p className="relative text-sm font-semibold uppercase tracking-wider text-stem-orange">
               In one sentence
             </p>
-            <p className="mt-3 max-w-4xl text-lg leading-relaxed text-midnight sm:text-xl">
+            <p className="relative mt-3 max-w-4xl text-lg leading-relaxed text-midnight sm:text-xl">
               <strong className="font-semibold">Intellobloom</strong> is the parent technology
               company — <strong className="font-semibold">IntelliSTEM</strong> is our education
               venture, and <strong className="font-semibold">AgniKawach</strong> is our industrial
               safety initiative for Oil &amp; Gas.
             </p>
-          </div>
+          </motion.div>
         </SectionReveal>
       </div>
     </section>

@@ -31,7 +31,7 @@ export function BusinessVentures() {
                 className={cn(
                   "group relative overflow-hidden rounded-2xl border shadow-sm transition-shadow duration-500 hover:shadow-soft",
                   venture.theme === "intellistem"
-                    ? "border-slate-200 bg-gradient-to-br from-white to-orange-50/40"
+                    ? "border-slate-200 bg-gradient-to-br from-white to-blue-50/60"
                     : "border-slate-800/20 bg-gradient-to-br from-graphite to-midnight text-white",
                 )}
               >
@@ -90,7 +90,7 @@ export function BusinessVentures() {
                     className={cn(
                       "relative min-h-[240px] border-t lg:min-h-[320px] lg:border-t-0 lg:border-l",
                       venture.theme === "intellistem"
-                        ? "border-slate-100 bg-[linear-gradient(135deg,#f8fafc_0%,#fff7ed_50%,#f1f5f9_100%)]"
+                        ? "border-slate-100 bg-[linear-gradient(135deg,#f8fafc_0%,#eff6ff_50%,#f1f5f9_100%)]"
                         : "border-white/10 bg-[#0d1324]",
                     )}
                     aria-hidden
@@ -114,16 +114,52 @@ export function BusinessVentures() {
 function IntelliSTEMVisual() {
   return (
     <svg className="absolute inset-0 h-full w-full" viewBox="0 0 400 320">
-      <rect x="40" y="60" width="120" height="80" rx="8" fill="#707780" opacity="0.15" />
-      <circle cx="100" cy="100" r="24" fill="#F28C28" opacity="0.2" />
-      <path
+      <defs>
+        <linearGradient id="stemGlow" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#2563eb" stopOpacity="0.35" />
+          <stop offset="100%" stopColor="#64748b" stopOpacity="0.1" />
+        </linearGradient>
+      </defs>
+      <motion.rect
+        x="40"
+        y="60"
+        width="120"
+        height="80"
+        rx="8"
+        fill="url(#stemGlow)"
+        animate={{ opacity: [0.5, 0.85, 0.5] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.circle
+        cx="100"
+        cy="100"
+        r="24"
+        fill="#2563eb"
+        animate={{ r: [22, 28, 22], opacity: [0.15, 0.28, 0.15] }}
+        transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.path
         d="M200 140 L280 100 L280 180 Z"
         fill="none"
-        stroke="#F28C28"
+        stroke="#2563eb"
         strokeWidth="1.5"
-        opacity="0.5"
+        animate={{ opacity: [0.35, 0.75, 0.35] }}
+        transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
       />
-      <rect x="220" y="200" width="140" height="60" rx="6" fill="#707780" opacity="0.12" />
+      {[0, 1, 2].map((i) => (
+        <motion.rect
+          key={i}
+          x={220 + i * 18}
+          y={200 - i * 8}
+          width="120"
+          height="8"
+          rx="4"
+          fill="#707780"
+          opacity={0.12}
+          animate={{ x: [220 + i * 18, 228 + i * 18, 220 + i * 18] }}
+          transition={{ duration: 3 + i * 0.4, repeat: Infinity, ease: "easeInOut" }}
+        />
+      ))}
       <text x="48" y="280" fill="#707780" fontSize="11" fontFamily="system-ui">
         AI · Robotics · Coding Labs
       </text>
@@ -134,26 +170,39 @@ function IntelliSTEMVisual() {
 function AgniVisual() {
   return (
     <svg className="absolute inset-0 h-full w-full" viewBox="0 0 400 320">
-      <path
+      <motion.path
         d="M60 240 L200 80 L340 240"
         fill="none"
         stroke="#E85D4C"
-        strokeWidth="1"
-        opacity="0.35"
+        strokeWidth="1.2"
+        animate={{ opacity: [0.25, 0.55, 0.25] }}
+        transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
       />
       {[80, 140, 200, 260].map((x, i) => (
-        <line
+        <motion.line
           key={x}
           x1={x}
           y1={200}
           x2={x}
           y2={120 - i * 10}
-          stroke="#5B8CFF"
+          stroke="#2563eb"
           strokeWidth="1"
-          opacity="0.25"
+          animate={{ opacity: [0.15, 0.45, 0.15], y1: [200, 196, 200] }}
+          transition={{ duration: 2.2 + i * 0.3, repeat: Infinity, ease: "easeInOut" }}
         />
       ))}
-      <rect x="120" y="160" width="160" height="100" rx="4" fill="none" stroke="#94A3B8" strokeOpacity="0.3" />
+      <motion.rect
+        x="120"
+        y="160"
+        width="160"
+        height="100"
+        rx="4"
+        fill="none"
+        stroke="#94A3B8"
+        strokeOpacity="0.35"
+        animate={{ strokeOpacity: [0.2, 0.45, 0.2] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+      />
       <text x="48" y="280" fill="#94A3B8" fontSize="11" fontFamily="system-ui">
         Consequence modelling · Risk analysis
       </text>

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { useReducedMotion } from "framer-motion";
 import { useScrollMotion } from "@/hooks/useScrollMotion";
 
 export function ParallaxEngineeringField() {
