@@ -22,9 +22,9 @@ export type BusinessVenture = {
 export const parentCompany = {
   id: "intellibloom",
   name: "Intellobloom",
-  label: "Parent Company",
+  label: "IB Group",
   description:
-    "The overarching technology brand that develops and oversees specialized ventures across industries.",
+    "Intellobloom Interactive Learning Private Limited — the parent technology brand behind IntelliSTEM and AgniKawach.",
 };
 
 export const businesses: BusinessVenture[] = [
@@ -34,7 +34,7 @@ export const businesses: BusinessVenture[] = [
     name: "IntelliSTEM",
     role: "venture",
     category: "Education Technology",
-    verticalLabel: "Vertical 01 — Education Technology",
+    verticalLabel: "Education & Technology",
     headline: "Making Future-Ready Learning Practical.",
     description:
       "IntelliSTEM brings AI, robotics, coding, and emerging technologies into hands-on learning experiences for students and educational institutions.",
@@ -59,7 +59,7 @@ export const businesses: BusinessVenture[] = [
     name: "AgniKawach",
     role: "initiative",
     category: "Oil & Gas | Industrial Safety Technology",
-    verticalLabel: "Vertical 02 — Oil & Gas / Industrial Safety",
+    verticalLabel: "Energy, Oil & Gas & Industrial Safety",
     headline: "Modelling Consequences. Informing Safer Decisions.",
     description:
       "AgniKawach is an industrial safety technology initiative focused on consequence modelling and risk assessment for the Oil & Gas sector.",

@@ -1,23 +1,23 @@
 import type { Metadata } from "next";
-import { Inter, Plus_Jakarta_Sans, Geist_Mono } from "next/font/google";
+import { Manrope, Instrument_Sans, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SiteShell } from "@/components/layout/SiteShell";
 import { defaultMetadata } from "@/lib/metadata";
 
-const inter = Inter({
-  variable: "--font-inter",
+const sans = Manrope({
+  variable: "--font-sans",
   subsets: ["latin"],
   display: "swap",
 });
 
-const display = Plus_Jakarta_Sans({
+const display = Instrument_Sans({
   variable: "--font-display",
   subsets: ["latin"],
   display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const mono = Geist_Mono({
+  variable: "--font-mono",
   subsets: ["latin"],
   display: "swap",
 });
@@ -38,9 +38,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${display.variable} ${geistMono.variable} h-full scroll-smooth antialiased`}
+      className={`${sans.variable} ${display.variable} ${mono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-sans">
+      <body className="flex min-h-full flex-col bg-platinum font-sans text-midnight">
         <SiteShell>{children}</SiteShell>
       </body>
     </html>

@@ -1,17 +1,21 @@
 export const company = {
   name: "Intellobloom",
-  logo: "/branding/intellobloom-logo.png",
-  logoMark: "/branding/intellobloom-mark.png",
-  tagline: "Engineering Intelligence. Enabling Impact.",
-  subTagline: "A technology parent company building ventures for education and industrial safety.",
+  brandPrimary: "INTELLOBLOOM",
+  brandSecondary: "IB GROUP",
+  legalName: "Intellobloom Interactive Learning Private Limited",
+  logo: "/images/logo.webp",
+  logoMark: "/images/logo.webp",
+  tagline: "Engineering Intelligence. Building Tomorrow.",
+  subTagline:
+    "An innovation-driven group advancing education, intelligent technologies and industrial safety.",
   description:
-    "Intellobloom develops, operates, and supports focused technology ventures — from AI and robotics education for schools, to industrial safety and consequence modelling for Oil & Gas. We combine product engineering, design, and security discipline under one parent brand.",
+    "Intellobloom (IB Group) develops and operates focused technology ventures — from AI and robotics education for schools, to industrial safety and consequence modelling for Oil & Gas. We combine product engineering, design, and security discipline under one parent brand.",
   parentDescription:
-    "Intellobloom is the parent technology company behind IntelliSTEM and AgniKawach — creating industry-specific solutions while remaining open to new ventures and partnerships.",
+    "IB Group is the corporate identity of Intellobloom Interactive Learning Private Limited — the parent organization behind IntelliSTEM and AgniKawach.",
   overview: {
     headline: "What Intellobloom does",
     summary:
-      "We are not a single product — we are a technology company that builds and runs specialized ventures. Each venture has its own audience and engineering focus; together they reflect our commitment to practical, deployable innovation.",
+      "We are not a single product — we are a technology group that builds and runs specialized ventures. Each venture has its own audience and engineering focus; together they reflect our commitment to practical, deployable innovation.",
     blocks: [
       {
         title: "Parent company & venture builder",
@@ -31,7 +35,7 @@ export const company = {
       },
     ],
   },
-  introHeadline: "One company. Focused ventures. Clear industry outcomes.",
+  introHeadline: "One group. Focused ventures. Clear industry outcomes.",
   introBody:
     "Intellobloom exists to turn complex domain problems into maintainable technology — whether that means a learning platform for schools or safety intelligence for industrial teams.",
   heroGlance: [
@@ -63,7 +67,7 @@ export const company = {
     description:
       "Whether you are an institution, an industrial team, or a partner exploring a new venture — we engage on focused engineering work with clear scope and long-term intent.",
     primaryLabel: "Start a Project Conversation",
-    secondaryLabel: "Explore Our Ventures",
+    secondaryLabel: "Explore What We Work On",
   },
   pillars: [
     {
@@ -85,12 +89,14 @@ export const company = {
   about: {
     headline: "The company behind the ventures.",
     paragraphs: [
-      "Intellobloom is a parent technology organization. Our role is to identify meaningful industry problems, shape focused ventures, and support those ventures with consistent engineering, design, and security practice.",
+      "Intellobloom Interactive Learning Private Limited operates as IB Group — a parent technology organization. Our role is to identify meaningful industry problems, shape focused ventures, and support those ventures with consistent engineering, design, and security practice.",
       "IntelliSTEM addresses education: practical AI, robotics, and coding experiences for students and schools. AgniKawach addresses industrial safety technology for Oil & Gas — especially consequence modelling and engineering decision support. Both are part of Intellobloom; neither replaces the parent company.",
-      "We are structured to grow: new verticals and partner-led initiatives can be added as ventures when there is clear scope and commitment. If you are exploring a program, a product engagement, or a long-term collaboration, we start with understanding your context — then we propose focused next steps.",
+      "We are structured to grow: new focus areas and partner-led initiatives can be added as ventures when there is clear scope and commitment. If you are exploring a program, a product engagement, or a long-term collaboration, we start with understanding your context — then we propose focused next steps.",
     ],
     mission:
       "To build and operate technology ventures that make advanced engineering accessible — in classrooms, in industry, and in new domains we take on with partners.",
+    vision:
+      "A technology group where education and industrial safety advance together — built with engineering discipline and long-term intent.",
   },
   contact: {
     headline: "Have a Challenge Worth Solving?",

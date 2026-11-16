@@ -7,7 +7,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }
 
   const base = `https://${company.productionDomain.replace(/^https?:\/\//, "")}`;
-  const routes = ["", "/about", "/contact", "/businesses/intellistem", "/businesses/agnikawach", "/privacy", "/terms"];
+  const routes = [
+    "",
+    "/about",
+    "/contact",
+    "/innovation",
+    "/verticals/education",
+    "/verticals/energy",
+    "/businesses/intellistem",
+    "/businesses/agnikawach",
+    "/privacy",
+    "/terms",
+  ];
 
   return routes.map((path) => ({
     url: `${base}${path}`,

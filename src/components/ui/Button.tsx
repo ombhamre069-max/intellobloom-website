@@ -11,19 +11,18 @@ type Size = "sm" | "md" | "lg";
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-brand text-white hover:bg-[#e07d1f] shadow-[0_0_0_1px_rgb(242_140_40/0.35)] focus-visible:ring-brand",
+    "bg-electric text-white hover:bg-[#2f63c4] shadow-[0_0_0_1px_rgb(57_120_232/0.35)] focus-visible:ring-electric",
   secondary:
-    "bg-stem-grey/15 text-midnight border border-stem-grey/25 hover:bg-stem-grey/20 focus-visible:ring-stem-grey",
-  ghost:
-    "text-slate-muted hover:text-white hover:bg-white/5 focus-visible:ring-white/30",
+    "bg-charcoal text-white border border-white/10 hover:bg-midnight focus-visible:ring-steel",
+  ghost: "text-steel hover:text-white hover:bg-white/5 focus-visible:ring-white/30",
   outline:
-    "border border-stem-grey/30 text-midnight bg-white hover:border-stem-orange/50 hover:text-stem-orange focus-visible:ring-stem-orange",
+    "border border-midnight/15 text-midnight bg-white hover:border-electric/50 hover:text-electric focus-visible:ring-electric",
 };
 
 const sizes: Record<Size, string> = {
   sm: "text-sm px-4 py-2 rounded-md",
-  md: "text-sm px-5 py-2.5 rounded-lg",
-  lg: "text-base px-6 py-3 rounded-xl",
+  md: "text-sm px-5 py-2.5 rounded-md",
+  lg: "text-base px-6 py-3 rounded-md",
 };
 
 type ButtonProps = {
@@ -53,7 +52,7 @@ export function Button({
   const reduced = useReducedMotion();
 
   const classes = cn(
-    "relative inline-flex items-center justify-center gap-2 overflow-hidden font-medium transition-colors duration-[var(--duration-normal)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-midnight disabled:opacity-50 disabled:pointer-events-none",
+    "relative inline-flex items-center justify-center gap-2 overflow-hidden font-medium transition-colors duration-[var(--duration-normal)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-platinum disabled:opacity-50 disabled:pointer-events-none",
     variants[variant],
     sizes[size],
     shine && variant === "primary" && "btn-shine",

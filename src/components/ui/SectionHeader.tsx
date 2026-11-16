@@ -26,8 +26,8 @@ export function SectionHeader({
   const content = (
     <>
       {eyebrow && (
-        <p className="mb-3 inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.24em] text-stem-orange">
-          <span className="h-px w-8 bg-gradient-to-r from-stem-orange to-transparent" aria-hidden />
+        <p className="mb-3 inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.24em] text-electric">
+          <span className="h-px w-8 bg-gradient-to-r from-electric to-transparent" aria-hidden />
           {eyebrow}
         </p>
       )}
@@ -41,7 +41,7 @@ export function SectionHeader({
       </h2>
       <div
         className={cn(
-          "mt-4 h-1 rounded-full bg-gradient-to-r from-stem-orange via-stem-orange/40 to-transparent",
+          "mt-4 h-1 rounded-full bg-gradient-to-r from-electric via-electric/40 to-transparent",
           align === "center" ? "mx-auto w-24" : "w-20",
         )}
         aria-hidden
@@ -50,7 +50,7 @@ export function SectionHeader({
         <p
           className={cn(
             "mt-5 text-base leading-relaxed sm:text-lg",
-            dark ? "text-slate-muted" : "text-stem-grey",
+            dark ? "text-steel" : "text-steel",
           )}
         >
           {description}
