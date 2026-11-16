@@ -6,29 +6,16 @@ import gsap from "gsap";
 import { company } from "@/content/company";
 import { cn } from "@/lib/utils";
 
-const REVEAL_KEY = "ib-hero-brand-reveal-v1";
+/** Survives Strict Mode effect re-runs / remounts within this JS page load; clears on full reload. */
+let revealCompletedThisLoad = false;
+
+const LEGACY_SESSION_KEY = "ib-hero-brand-reveal-v1";
 
 type HeroBrandRevealProps = {
   reduced: boolean;
   onComplete?: () => void;
   className?: string;
 };
-
-function hasPlayedThisSession() {
-  try {
-    return sessionStorage.getItem(REVEAL_KEY) === "1";
-  } catch {
-    return false;
-  }
-}
-
-function markPlayed() {
-  try {
-    sessionStorage.setItem(REVEAL_KEY, "1");
-  } catch {
-    /* ignore */
-  }
-}
 
 /**
  * Cinematic brand reveal:
@@ -47,10 +34,17 @@ export function HeroBrandReveal({
   const [phase, setPhase] = useState<"boot" | "play" | "done">("boot");
 
   useEffect(() => {
+    // Drop legacy session flag so old tabs don't stay stuck in "already played"
+    try {
+      sessionStorage.removeItem(LEGACY_SESSION_KEY);
+    } catch {
+      /* ignore */
+    }
+
     const finish = () => {
       if (completedRef.current) return;
       completedRef.current = true;
-      markPlayed();
+      revealCompletedThisLoad = true;
       setPhase("done");
       onComplete?.();
     };
@@ -68,7 +62,9 @@ export function HeroBrandReveal({
       typeof window !== "undefined" &&
       new URLSearchParams(window.location.search).has("reveal");
 
-    if ((reduced || hasPlayedThisSession()) && !forcePlay) {
+    // Instant final: reduced motion, or already finished this JS page load (re-render / remount).
+    // Flag is module-scoped — clears on full reload, so reload always plays.
+    if ((reduced || revealCompletedThisLoad) && !forcePlay) {
       gsap.set(mark, { x: 0, opacity: 1, scale: 1, clearProps: "transform" });
       gsap.set(wordClip, { clipPath: "inset(0 0% 0 0)", opacity: 1 });
       gsap.set(secondary, { opacity: 1, y: 0 });
