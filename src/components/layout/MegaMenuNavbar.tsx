@@ -96,8 +96,8 @@ export function MegaMenuNavbar() {
                   className={cn(
                     "group flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium transition-colors",
                     darkHero && !scrolled
-                      ? "text-steel hover:text-white"
-                      : "text-steel hover:text-midnight",
+                      ? "text-white/80 hover:text-white"
+                      : "text-midnight/70 hover:text-midnight",
                   )}
                   onClick={() => setWorkOpen((o) => !o)}
                   aria-expanded={workOpen}
@@ -147,8 +147,8 @@ export function MegaMenuNavbar() {
                         ? "text-white"
                         : "text-electric"
                       : darkHero && !scrolled
-                        ? "text-steel hover:text-white"
-                        : "text-steel hover:text-midnight",
+                        ? "text-white/80 hover:text-white"
+                        : "text-midnight/70 hover:text-midnight",
                   )}
                 >
                   {item.label}

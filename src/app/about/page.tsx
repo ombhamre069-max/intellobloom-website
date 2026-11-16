@@ -24,7 +24,7 @@ export default function AboutPage() {
           <h1 className="mt-4 max-w-3xl font-display text-4xl font-semibold tracking-tight text-midnight sm:text-5xl">
             {company.brandPrimary}
           </h1>
-          <p className="mt-2 text-sm font-medium uppercase tracking-[0.32em] text-steel">
+          <p className="mt-2 text-sm font-semibold uppercase tracking-[0.32em] text-midnight/70">
             {company.brandSecondary}
           </p>
           <p className="mt-6 max-w-3xl text-lg leading-relaxed text-steel">

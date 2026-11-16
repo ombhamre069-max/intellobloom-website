@@ -5,6 +5,7 @@ import { Building2, Factory, GraduationCap, Handshake } from "lucide-react";
 import { company } from "@/content/company";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { SectionReveal } from "@/components/ui/SectionReveal";
+import { SectionPattern } from "@/components/ui/SectionPattern";
 import { SpotlightCard } from "@/components/ui/SpotlightCard";
 import { fadeUp, viewport } from "@/components/motion/variants";
 import { cn } from "@/lib/utils";
@@ -16,7 +17,11 @@ export function CompanyOverviewSection() {
   const { overview } = company;
 
   return (
-    <section id="overview" className="section-glass border-b border-stem-grey/10 py-24 sm:py-28">
+    <SectionPattern
+      id="overview"
+      pattern="graph"
+      className="border-b border-midnight/8 py-24 sm:py-28"
+    >
       <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
         <SectionHeader
           eyebrow="Company Overview"
@@ -49,7 +54,7 @@ export function CompanyOverviewSection() {
                 )}
               >
                 <SpotlightCard
-                  className={cn("card-border-glow h-full", index === 0 && "lg:min-h-[220px]")}
+                  className={cn("card-border-glow h-full bg-white/90", index === 0 && "lg:min-h-[220px]")}
                   innerClassName={cn(
                     "flex flex-col p-8",
                     index === 0 && "lg:flex-row lg:items-start lg:gap-8 lg:p-10",
@@ -65,7 +70,7 @@ export function CompanyOverviewSection() {
                   </div>
                   <div className="mt-5 lg:mt-0">
                     <h3 className="font-display text-xl font-semibold text-midnight">{block.title}</h3>
-                    <p className="mt-3 text-base leading-relaxed text-stem-grey">{block.body}</p>
+                    <p className="mt-3 text-base leading-relaxed text-midnight/70">{block.body}</p>
                   </div>
                 </SpotlightCard>
               </motion.div>
@@ -75,7 +80,7 @@ export function CompanyOverviewSection() {
 
         <SectionReveal className="mt-12">
           <motion.div
-            className="relative overflow-hidden rounded-2xl border border-stem-orange/25 bg-gradient-to-br from-stem-orange/12 via-white/80 to-stem-grey/8 px-6 py-8 backdrop-blur-md sm:px-10"
+            className="relative overflow-hidden rounded-2xl border border-stem-orange/25 bg-gradient-to-br from-stem-orange/12 via-white/90 to-stem-grey/8 px-6 py-8 backdrop-blur-md sm:px-10"
             whileHover={reduced ? undefined : { scale: 1.005 }}
           >
             <div
@@ -94,6 +99,6 @@ export function CompanyOverviewSection() {
           </motion.div>
         </SectionReveal>
       </div>
-    </section>
+    </SectionPattern>
   );
 }

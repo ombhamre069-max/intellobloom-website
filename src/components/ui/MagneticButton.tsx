@@ -9,9 +9,10 @@ type MagneticButtonProps = {
   href: string;
   children: ReactNode;
   className?: string;
-  variant?: "primary" | "secondary" | "ghost" | "outline";
+  variant?: "primary" | "secondary" | "ghost" | "outline" | "clear";
   size?: "sm" | "md" | "lg";
   external?: boolean;
+  shine?: boolean;
 };
 
 const variants = {
@@ -22,6 +23,7 @@ const variants = {
   ghost: "text-steel hover:text-white hover:bg-white/5",
   outline:
     "border border-midnight/15 text-midnight bg-white/80 hover:border-electric/50 hover:text-electric",
+  clear: "border border-white/40 bg-transparent text-white",
 };
 
 const sizes = {
@@ -37,6 +39,7 @@ export function MagneticButton({
   variant = "primary",
   size = "md",
   external = false,
+  shine = true,
 }: MagneticButtonProps) {
   const reduced = useReducedMotion();
   const ref = useRef<HTMLAnchorElement>(null);
@@ -60,7 +63,8 @@ export function MagneticButton({
   };
 
   const classes = cn(
-    "btn-shine relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-md font-medium transition-colors duration-300",
+    "relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-md font-medium transition-colors duration-300",
+    shine && "btn-shine",
     variants[variant],
     sizes[size],
     className,

@@ -74,8 +74,9 @@ export function BrandLockup({
         </span>
         <span
           className={cn(
-            "mt-1.5 font-medium uppercase text-steel",
+            "mt-1.5 font-semibold uppercase",
             s.secondary,
+            light ? "text-white/75" : "text-midnight/70",
           )}
         >
           {company.brandSecondary}

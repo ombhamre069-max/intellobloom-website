@@ -1,14 +1,13 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion } from "framer-motion";
 import { company } from "@/content/company";
-import { BrandLockup } from "@/components/ui/BrandLockup";
+import { HeroBrandReveal } from "@/components/cinematic/HeroBrandReveal";
 import { MagneticButton } from "@/components/ui/MagneticButton";
-import { VerticalGatewayCard } from "@/components/cinematic/VerticalGatewayCard";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
 const HeroScene3D = dynamic(
@@ -19,22 +18,26 @@ const HeroScene3D = dynamic(
 export function CinematicHero() {
   const reduced = usePrefersReducedMotion();
   const sectionRef = useRef<HTMLElement>(null);
-  const lockupRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const subRef = useRef<HTMLParagraphElement>(null);
+  const [brandDone, setBrandDone] = useState(false);
+
+  const handleBrandComplete = useCallback(() => {
+    setBrandDone(true);
+  }, []);
+
+  // Safety: never leave hero copy invisible if brand reveal stalls
+  useEffect(() => {
+    if (brandDone) return;
+    const t = window.setTimeout(() => setBrandDone(true), 4200);
+    return () => window.clearTimeout(t);
+  }, [brandDone]);
 
   useEffect(() => {
-    if (reduced || !sectionRef.current) return;
+    if (!sectionRef.current) return;
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-      tl.from(lockupRef.current, { y: 28, opacity: 0, duration: 0.9 })
-        .from(titleRef.current, { y: 48, opacity: 0, duration: 1 }, "-=0.45")
-        .from(subRef.current, { y: 28, opacity: 0, duration: 0.85 }, "-=0.55")
-        .from(".hero-cta", { y: 20, opacity: 0, duration: 0.7 }, "-=0.4")
-        .from(".hero-gateway", { y: 36, opacity: 0, duration: 0.9, stagger: 0.12 }, "-=0.35");
-
       gsap.to(".hero-parallax-bg", {
         yPercent: 22,
         ease: "none",
@@ -48,7 +51,26 @@ export function CinematicHero() {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, [reduced]);
+  }, []);
+
+  useEffect(() => {
+    if (!brandDone || reduced || !sectionRef.current) return;
+
+    // Animate position only — opacity stays React-owned (brandDone ? 1 : 0)
+    // so Strict Mode / GSAP revert can never leave copy stuck invisible.
+    const targets = [titleRef.current, subRef.current, ".hero-cta"];
+    const ctx = gsap.context(() => {
+      gsap.from(targets, {
+        y: 28,
+        duration: 0.85,
+        stagger: 0.12,
+        ease: "power3.out",
+        clearProps: "transform",
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, [brandDone, reduced]);
 
   return (
     <section
@@ -57,17 +79,22 @@ export function CinematicHero() {
       className="relative min-h-[100svh] overflow-hidden pt-[var(--nav-height)] text-white"
     >
       <div className="hero-parallax-bg hero-cinematic-bg absolute inset-0" aria-hidden />
-      <div className="architectural-grid-dark absolute inset-0 opacity-60" aria-hidden />
+      <div className="architectural-grid-dark absolute inset-0 z-0 opacity-35" aria-hidden />
+      <div
+        className="pointer-events-none absolute inset-0 z-[2] bg-[linear-gradient(90deg,rgb(16_28_44/0.88)_0%,rgb(16_28_44/0.42)_30%,transparent_55%)] max-lg:bg-[linear-gradient(180deg,rgb(16_28_44/0.5)_0%,rgb(16_28_44/0.15)_45%,transparent_72%)]"
+        aria-hidden
+      />
       {!reduced && <HeroScene3D />}
 
-      <div className="relative mx-auto flex min-h-[calc(100svh-var(--nav-height))] max-w-7xl flex-col justify-center px-5 pb-24 pt-8 sm:px-6 lg:px-8">
-        <div ref={lockupRef} className="mb-10">
-          <BrandLockup variant="light" size="hero" href={undefined} showMark priority />
+      <div className="relative z-10 mx-auto flex min-h-[calc(100svh-var(--nav-height))] max-w-7xl flex-col justify-center px-5 pb-28 pt-8 sm:px-6 lg:px-8 lg:pr-[min(42%,28rem)]">
+        <div className="mb-10 overflow-visible">
+          <HeroBrandReveal reduced={reduced} onComplete={handleBrandComplete} />
         </div>
 
         <h1
           ref={titleRef}
           className="max-w-4xl font-display text-[clamp(2.4rem,6.5vw,5.25rem)] font-semibold leading-[1.05] tracking-tight"
+          style={{ opacity: brandDone ? 1 : 0 }}
         >
           Engineering Intelligence.
           <br />
@@ -76,35 +103,31 @@ export function CinematicHero() {
 
         <p
           ref={subRef}
-          className="mt-7 max-w-2xl text-lg leading-relaxed text-steel sm:text-xl"
+          className="mt-7 max-w-2xl text-lg leading-relaxed text-white/75 sm:text-xl"
+          style={{ opacity: brandDone ? 1 : 0 }}
         >
           {company.subTagline}
         </p>
 
-        <div className="hero-cta mt-10 flex flex-wrap gap-4">
-          <MagneticButton href="/#verticals" size="lg">
-            Explore what we work on
+        <div
+          className="hero-cta mt-10 flex flex-wrap gap-4"
+          style={{ opacity: brandDone ? 1 : 0 }}
+        >
+          <MagneticButton href="/#our-story" variant="clear" size="lg" shine={false}>
+            Explore our story
           </MagneticButton>
-          <MagneticButton href="/contact" variant="outline" size="lg" className="border-white/25 bg-white/5 text-white hover:border-electric hover:text-white">
+          <MagneticButton href="/contact" variant="clear" size="lg" shine={false}>
             Start a conversation
           </MagneticButton>
         </div>
-
-        <div className="mt-16 grid gap-5 lg:mt-20 lg:grid-cols-2 lg:gap-7">
-          <div className="hero-gateway">
-            <VerticalGatewayCard id="education" />
-          </div>
-          <div className="hero-gateway">
-            <VerticalGatewayCard id="energy" />
-          </div>
-        </div>
       </div>
 
-      {!reduced && (
+      {!reduced && brandDone && (
         <motion.div
-          className="pointer-events-none absolute bottom-16 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 text-[10px] font-medium uppercase tracking-[0.35em] text-steel"
+          className="hero-scroll-cue pointer-events-none absolute bottom-10 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 text-[10px] font-medium uppercase tracking-[0.35em] text-white/55"
+          initial={{ opacity: 0, y: 12 }}
           animate={{ y: [0, 8, 0], opacity: [0.4, 1, 0.4] }}
-          transition={{ duration: 2.4, repeat: Infinity }}
+          transition={{ duration: 2.4, repeat: Infinity, delay: 0.35 }}
           aria-hidden
         >
           Scroll

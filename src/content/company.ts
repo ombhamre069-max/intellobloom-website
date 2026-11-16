@@ -104,9 +104,17 @@ export const company = {
       "Tell us about your organization, your industry, and the challenge you are working to solve.",
   },
   verifiedContact: {
-    email: null as string | null,
+    email: "support@intellobloom.in" as string | null,
     phone: null as string | null,
-    address: null as string | null,
+    address: "India" as string | null,
+  },
+  presence: {
+    headline: "Talk to IB Group",
+    body: "Whether you are a school, an industrial operator, or a prospective partner — start with a clear conversation about what you need.",
+    email: "support@intellobloom.in",
+    region: "India",
+    regionNote: "Technology company · Education & industrial safety",
+    legalLine: "Intellobloom Interactive Learning Private Limited",
   },
   social: {
     linkedin: null as string | null,

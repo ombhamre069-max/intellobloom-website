@@ -3,10 +3,15 @@
 import { verticals } from "@/content/verticals";
 import { VerticalGatewayCard } from "@/components/cinematic/VerticalGatewayCard";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { SectionPattern } from "@/components/ui/SectionPattern";
 
 export function VerticalsShowcase() {
   return (
-    <section id="verticals" className="section-glass-muted border-y border-midnight/8 py-24 sm:py-32">
+    <SectionPattern
+      id="verticals"
+      pattern="blueprint"
+      className="border-y border-midnight/8 py-24 sm:py-32"
+    >
       <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
         <SectionHeader
           eyebrow="What we work on"
@@ -18,13 +23,13 @@ export function VerticalsShowcase() {
           <VerticalGatewayCard id="education" />
           <VerticalGatewayCard id="energy" />
         </div>
-        <p className="mx-auto mt-10 max-w-2xl text-center text-sm text-steel">
+        <p className="mx-auto mt-10 max-w-2xl text-center text-sm text-midnight/65">
           <strong className="font-semibold text-midnight">{verticals.education.title}</strong>{" "}
           through {verticals.education.venture}.{" "}
           <strong className="font-semibold text-midnight">{verticals.energy.title}</strong> through{" "}
           {verticals.energy.venture}.
         </p>
       </div>
-    </section>
+    </SectionPattern>
   );
 }

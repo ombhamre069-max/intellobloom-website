@@ -7,16 +7,14 @@ import type { VerticalId } from "@/content/verticals";
 import { verticals } from "@/content/verticals";
 import { cn } from "@/lib/utils";
 
-const visuals: Record<VerticalId, { gradient: string; mesh: string; label: string }> = {
+const visuals: Record<VerticalId, { gradient: string; mesh: string }> = {
   education: {
     gradient: "from-electric/30 via-electric/10 to-transparent",
     mesh: "education-mesh",
-    label: "IntelliSTEM · AI · Robotics · STEM",
   },
   energy: {
     gradient: "from-agni/25 via-charcoal/40 to-transparent",
     mesh: "energy-mesh",
-    label: "AgniKawach · Oil & Gas · Risk & safety",
   },
 };
 
@@ -63,7 +61,7 @@ export function VerticalGatewayCard({ id }: { id: VerticalId }) {
         <p
           className={cn(
             "relative mt-1 text-xs font-medium uppercase tracking-wide",
-            id === "education" ? "text-steel" : "text-steel",
+            id === "education" ? "text-midnight/55" : "text-white/55",
           )}
         >
           {v.subtitle}
@@ -71,7 +69,7 @@ export function VerticalGatewayCard({ id }: { id: VerticalId }) {
         <p
           className={cn(
             "relative mt-4 max-w-sm text-sm leading-relaxed",
-            id === "education" ? "text-[#5a6b7d]" : "text-steel",
+            id === "education" ? "text-midnight/70" : "text-white/70",
           )}
         >
           {v.description}

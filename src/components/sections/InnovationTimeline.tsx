@@ -23,7 +23,7 @@ export function InnovationTimeline() {
 
         <div className="relative mt-16">
           <div
-            className="absolute left-0 right-0 top-8 hidden h-px bg-gradient-to-r from-transparent via-stem-orange/40 to-transparent md:block"
+            className="absolute left-0 right-0 top-8 hidden h-px bg-gradient-to-r from-transparent via-electric/45 to-transparent md:block"
             aria-hidden
           />
           <motion.ol
@@ -44,23 +44,23 @@ export function InnovationTimeline() {
                   transition={{ type: "spring", stiffness: 320, damping: 22 }}
                 >
                   <motion.span
-                    className="inline-flex h-16 w-16 items-center justify-center rounded-full border border-stem-orange/30 bg-white font-mono text-sm text-stem-orange shadow-sm"
+                    className="inline-flex h-16 w-16 items-center justify-center rounded-full border border-electric/35 bg-white font-mono text-sm font-semibold text-electric shadow-sm"
                     whileInView={reduced ? undefined : { scale: [0.85, 1.05, 1] }}
                     viewport={viewport}
                     transition={{ duration: 0.55, delay: index * 0.08 }}
                   >
                     {step.step}
                   </motion.span>
-                  <h3 className="mt-5 font-display text-lg font-semibold text-midnight">
+                  <h3 className="mt-5 font-display text-xl font-semibold tracking-tight text-midnight">
                     {step.title}
                   </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-stem-grey">
+                  <p className="mt-2 max-w-xs text-base leading-relaxed text-midnight/75 md:mx-auto">
                     {step.description}
                   </p>
                 </motion.div>
                 {index < innovationSteps.length - 1 && (
                   <div
-                    className="mx-auto mt-6 h-8 w-px bg-stem-orange/25 md:hidden"
+                    className="mx-auto mt-6 h-8 w-px bg-electric/30 md:hidden"
                     aria-hidden
                   />
                 )}

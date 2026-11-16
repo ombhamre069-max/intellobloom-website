@@ -50,7 +50,7 @@ export function SectionHeader({
         <p
           className={cn(
             "mt-5 text-base leading-relaxed sm:text-lg",
-            dark ? "text-steel" : "text-steel",
+            dark ? "text-white/70" : "text-midnight/70",
           )}
         >
           {description}
